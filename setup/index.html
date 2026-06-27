@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up the Cipher keyboard</title>
+<meta name="description" content="Turn on the Cipher keyboard on your iPhone in about a minute — then translate as you type, in any app.">
+<style>
+  :root{
+    --navy:#03061d; --navy2:#0a0f2e; --ink:#eef1ff; --muted:#9aa3d4;
+    --line:rgba(255,255,255,.10); --card:rgba(255,255,255,.045);
+    --indigo:#5b6cff; --purple:#9a6cf6; --cyan:#36e6e0;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; color:var(--ink);
+    font:400 17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(1100px 620px at 50% -8%, rgba(120,90,246,.30), transparent 60%),
+      radial-gradient(900px 560px at 88% 12%, rgba(54,230,224,.12), transparent 55%),
+      linear-gradient(180deg,#05071f 0%, var(--navy) 38%, #04061a 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:40px 22px 90px}
+  header.site{display:flex;align-items:center;gap:11px;padding-bottom:30px}
+  .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--indigo),var(--purple));
+    box-shadow:0 0 22px rgba(120,90,246,.6)}
+  header.site b{font-size:17px;letter-spacing:.2px}
+  nav{margin-left:auto;font-size:14px}
+  nav a{color:var(--muted);text-decoration:none;margin-left:16px}
+  nav a:hover{color:var(--cyan)}
+  .pill{display:inline-block;font-size:12.5px;letter-spacing:.4px;text-transform:uppercase;
+    color:#cdd3ff;background:rgba(91,108,255,.16);border:1px solid rgba(120,108,246,.4);
+    padding:6px 12px;border-radius:999px;margin-bottom:18px}
+  h1{font-size:34px;line-height:1.12;margin:0 0 12px;letter-spacing:-.4px;
+    background:linear-gradient(92deg,#fff 30%,#bfb6ff 70%,#7ef0ec);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:18px;color:#c7cdf2;margin:0 0 8px;max-width:36ch}
+  .time{color:var(--cyan);font-size:15px;margin:6px 0 36px;display:flex;align-items:center;gap:8px}
+  .time svg{width:17px;height:17px}
+
+  .steps{list-style:none;margin:0;padding:0;position:relative}
+  .steps:before{content:"";position:absolute;left:19px;top:14px;bottom:64px;width:2px;
+    background:linear-gradient(180deg,var(--indigo),var(--purple) 55%,rgba(154,108,246,0));opacity:.5}
+  .step{position:relative;padding:0 0 26px 60px}
+  .num{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-weight:600;font-size:17px;color:#fff;
+    background:linear-gradient(135deg,var(--indigo),var(--purple));
+    box-shadow:0 0 0 5px rgba(91,108,255,.10),0 6px 18px rgba(91,108,255,.35)}
+  .step h3{margin:7px 0 12px;font-size:18px;font-weight:600;letter-spacing:-.2px}
+  .step h3 em{font-style:normal;color:var(--cyan)}
+
+  .rows{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    backdrop-filter:blur(6px)}
+  .row{display:flex;align-items:center;gap:13px;padding:13px 15px;border-top:1px solid var(--line)}
+  .row:first-child{border-top:none}
+  .row .tile{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .row .tile svg{width:18px;height:18px;color:#fff}
+  .row .lbl{flex:1;font-size:16px;color:#eef1ff}
+  .row .lbl small{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+  .row .chev{color:#6b73a8;width:9px;height:15px;flex:0 0 auto}
+  .row .tog{width:46px;height:28px;border-radius:999px;flex:0 0 auto;position:relative;
+    background:linear-gradient(90deg,#2bd07e,#23c06f)}
+  .row .tog:after{content:"";position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;background:#fff}
+  .t-gear{background:linear-gradient(135deg,#8e94a6,#5c6378)}
+  .t-kbd{background:linear-gradient(135deg,#5b6cff,#8a5cf6)}
+  .t-add{background:linear-gradient(135deg,#2bd07e,#16a564)}
+  .t-cipher{background:linear-gradient(135deg,#6a5cff,#b06cf6)}
+  .t-lock{background:linear-gradient(135deg,#36e6e0,#1fb6c8)}
+  .added{margin-left:auto;font-size:13px;color:#5fe0a0;display:flex;align-items:center;gap:5px}
+  .added svg{width:15px;height:15px}
+
+  .use{margin:14px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 22px;
+    display:flex;align-items:center;gap:18px}
+  .globe{width:58px;height:58px;border-radius:14px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.06);border:1px solid var(--line)}
+  .globe svg{width:30px;height:30px;color:#dfe4ff}
+  .use h3{margin:0 0 4px;font-size:17px;font-weight:600}
+  .use p{margin:0;color:#c2c8ee;font-size:15px}
+
+  .fa{margin:30px 0 6px;border-radius:20px;padding:24px 22px;position:relative;
+    background:linear-gradient(180deg,rgba(54,230,224,.10),rgba(91,108,255,.07));
+    border:1px solid rgba(54,230,224,.28)}
+  .fa h2{margin:0 0 6px;font-size:20px;letter-spacing:-.2px;display:flex;align-items:center;gap:10px}
+  .fa h2 svg{width:21px;height:21px;color:var(--cyan)}
+  .fa p{margin:10px 0 0;color:#d4d9f5;font-size:15.5px}
+  .fa ul{margin:14px 0 0;padding:0;list-style:none}
+  .fa li{position:relative;padding:7px 0 7px 28px;color:#cdd3f2;font-size:15.5px}
+  .fa li svg{position:absolute;left:0;top:9px;width:17px;height:17px;color:var(--cyan)}
+
+  footer{margin-top:50px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;
+    display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center}
+  footer a{color:var(--muted);text-decoration:none}
+  footer a:hover{color:var(--cyan)}
+  footer .sp{margin-left:auto}
+  @media(max-width:560px){h1{font-size:28px}.lede{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <span class="logo" aria-hidden="true"></span>
+    <b>Cipher</b>
+    <nav aria-label="Pages">
+      <a href="/privacy/">Privacy</a>
+      <a href="/support/">Support</a>
+    </nav>
+  </header>
+
+  <span class="pill">iPhone setup</span>
+  <h1>Turn on the Cipher keyboard</h1>
+  <p class="lede">About a minute in Settings. Then translate as you type &mdash; in Messages, WhatsApp, anywhere.</p>
+  <p class="time" aria-label="Takes about one minute">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>
+    Takes about one minute
+  </p>
+
+  <ol class="steps">
+    <li class="step">
+      <span class="num">1</span>
+      <h3>Open <em>Settings</em> &rarr; General</h3>
+      <div class="rows">
+        <div class="row">
+          <span class="tile t-gear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3 14a1.6 1.6 0 0 0-1.5-1H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 3 7.6 1.6 1.6 0 0 0 2.7 5.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 9 3V2a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 17 5.6l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V11a1.6 1.6 0 0 0 1.5 1h.1a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg></span>
+          <span class="lbl">General</span>
+          <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l6 6-6 6"/></svg>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="num">2</span>
+      <h3>Tap <em>Keyboard</em>, then <em>Keyboards</em></h3>
+      <div class="rows">
+        <div class="row">
+          <span class="tile t-kbd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h0M10 10h0M14 10h0M18 10h0M7 14h10"/></svg></span>
+          <span class="lbl">Keyboard</span>
+          <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l6 6-6 6"/></svg>
+        </div>
+        <div class="row">
+          <span class="tile t-kbd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h0M10 10h0M14 10h0M18 10h0M7 14h10"/></svg></span>
+          <span class="lbl">Keyboards <small>Shows how many you have</small></span>
+          <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l6 6-6 6"/></svg>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="num">3</span>
+      <h3>Tap <em>Add New Keyboard&hellip;</em> &rarr; choose <em>Cipher</em></h3>
+      <div class="rows">
+        <div class="row">
+          <span class="tile t-add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          <span class="lbl">Add New Keyboard&hellip;</span>
+          <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l6 6-6 6"/></svg>
+        </div>
+        <div class="row">
+          <span class="tile t-cipher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 8a5 5 0 1 0 0 8M12 3v2M12 19v2"/></svg></span>
+          <span class="lbl">Cipher <small>Under Third-Party Keyboards</small></span>
+          <span class="added"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5L20 6"/></svg>Added</span>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="num">4</span>
+      <h3>For translate-as-you-type: turn on <em>Allow Full Access</em></h3>
+      <div class="rows">
+        <div class="row">
+          <span class="tile t-cipher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 8a5 5 0 1 0 0 8M12 3v2M12 19v2"/></svg></span>
+          <span class="lbl">Cipher <small>Tap it again in the list</small></span>
+          <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l6 6-6 6"/></svg>
+        </div>
+        <div class="row">
+          <span class="tile t-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <span class="lbl">Allow Full Access</span>
+          <span class="tog" role="img" aria-label="On"></span>
+        </div>
+      </div>
+    </li>
+  </ol>
+
+  <div class="use">
+    <span class="globe" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/></svg>
+    </span>
+    <div>
+      <h3>Now use it anywhere</h3>
+      <p>In any app, press and hold the <strong>&#127760; globe key</strong> on your keyboard, then choose <strong>Cipher</strong>.</p>
+    </div>
+  </div>
+
+  <section class="fa" aria-labelledby="fa-h">
+    <h2 id="fa-h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>What &ldquo;Allow Full Access&rdquo; really does</h2>
+    <p>iOS asks for it because that&rsquo;s the only way a keyboard can reach the internet &mdash; and for Cipher, the <em>only</em> thing it&rsquo;s used for is translating your text online. Here&rsquo;s the honest version:</p>
+    <ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5L20 6"/></svg>The keyboard types fully <strong>without</strong> Full Access &mdash; letters, numbers, emoji, autocorrect. You only need it for online translation.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5L20 6"/></svg>When on, only the text you choose to translate is sent over an encrypted connection &mdash; no account, no name, nothing stored.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5L20 6"/></svg>It&rsquo;s automatically off in password, card-number, and other sensitive fields.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 Boost My Biz Ai</span>
+    <span class="sp"></span>
+    <a href="/privacy/">Privacy</a>
+    <a href="/terms/">Terms</a>
+    <a href="/support/">Support</a>
+  </footer>
+</div>
+</body>
+</html>
